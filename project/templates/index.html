@@ -1,0 +1,299 @@
+  {% extends 'base.html' %} {% load static %}
+
+  {% block content %}
+      
+      <div class="site-section-cover overlay" style="background-image: url('{% static 'images/hero_bg.jpg' %}');">
+        
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-10 text-center">
+              <h1><strong>Kompyuter savodxonligi</strong> va <strong>IT dasturlash</strong> maktabi</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-section bg-light pb-0">
+        <div class="container ">
+          <div class="row align-items-stretch overlap ">
+            <div class="col-lg-8 maqsad">
+              <div class="box h-100">
+                <div class="d-flex align-items-center">
+                  <div class="img"><img src="{% static 'images/header/way.jpg' %}" class="img-fluid" alt="Image"></div>
+                  <div class="text">
+                    <a href="#" class="category">Maqsad</a>
+                    <h3><a href="#">Bizning maqsadimiz</a></h3>
+                    <p>
+                      Sizning axborot texnologiyaalr sohasidagi bilim va ishlash ko'nikmangizni oshirishdan iborat.
+                    </p>
+                    <p class="mb-0">
+                      <span class="brand-react h5"></span>
+                      <span class="brand-javascript h5"></span>
+                    </p>
+                    <p class="meta">
+                      <span class="mr-2 mb-2">Kelajak kasbini bugundan boshlang</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="box small h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="img"><img src="{% static 'images/header/resourse.jpg' %}" class="img-fluid" alt="Image"></div>
+                  <div class="text">
+                    <a href="#" class="category">Kurslar</a>
+                    <h3><a href="#">3 ta</a></h3>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <div class="img"><img src="{% static 'images/header/certified.jpg' %}" class="img-fluid" alt="Image"></div>
+                  <div class="text">
+                    <a href="#" class="category">Serftifikatlar</a>
+                    <h3><a href="#">20 ta</a></h3>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="img"><img src="{% static 'images/header/students.jpg' %}" class="img-fluid" alt="Image"></div>
+                  <div class="text">
+                    <a href="#" class="category">Talabalar</a>
+                    <h3><a href="#">30 ta</a></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="site-section">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="heading mb-4">
+                <span class="caption">Top yo'nalishlar</span>
+                <h2>Yo'nalishlar</h2>
+              </div>
+            </div>  
+          </div>
+          <div class="row align-items-stretch">
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-adobeillustrator"></span>
+                <h3>Illustrator</h3>
+              </a>
+            </div>
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-adobephotoshop"></span>
+                <h3>Photoshop</h3>
+              </a>
+            </div>
+            
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-angular"></span>
+                <h3>Angular</h3>
+              </a>
+            </div>
+            
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-javascript"></span>
+                <h3>JavaScript</h3>
+              </a>
+            </div>
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-react"></span>
+                <h3>React</h3>
+              </a>
+            </div>
+            <div class="col-lg-2">
+              <a href="#" class="course">
+                <span class="wrap-icon brand-vue-dot-js"></span>
+                <h3>Vue</h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+              
+  
+      <div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="heading mb-4">
+                <span class="caption">Top kurslar</span>
+                <h2>Kurslar</h2>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              
+
+              {% for get in courses %}
+              <div class="d-flex tutorial-item mb-4">
+                <div class="img-wrap">
+                  {% if username is None %}
+                  <a href="{% url 'login' %}">
+                  {% else %}
+                  <a href="{% url 'course' pk=get.id %}">
+                  {% endif %}
+                    <img src="../media/{{ get.image }}" alt="Image" class="img-fluid"></a>
+                </div>
+                <div>
+                  <h3>
+                    {% if username is None %}
+                    <a href="{% url 'login' %}">
+                    {% else %}
+                    <a href="{% url 'course' pk=get.id %}">
+                    {% endif %}
+                    {{ get.name }}</a></h3>
+                  <p>
+                    IT sohasidagi bilim va ko'nikmalaringizni oshirish imkoniyatini qo'ldan boy bermang
+                  </p>
+                  
+                  <p class="mb-0">
+                    <span class="brand-react h5"></span>
+                    <span class="brand-javascript h5"></span>
+                  </p>
+                  <p class="meta">
+                    <span class="mr-2 mb-2"> Kelajaging uchun harakatni bugundan boshlang </span>
+                  </p>
+                  
+                  <p>
+                    {% if username is None %}
+                    <a href="{% url 'login' %}" class="btn btn-primary custom-btn">
+                    {% else %}
+                    <a href="{% url 'course' pk=get.id %}" class="btn btn-primary custom-btn">
+                    {% endif %}
+                    Ko'rish</a></p>
+                </div>
+              </div>
+              {% endfor %}
+             <style>
+              @media (max-width: 768px) {
+                .tutorial-item {
+                  display: flex;
+                  flex-direction: column;
+                }
+                .maqsad{
+                  display: flex;
+                  flex-direction: column;
+                }
+              }
+              </style>
+
+            </div>
+
+
+            <div class="col-lg-4"> 
+              {% for get in courses %}
+              <div class="box-side mb-3">
+                {% if username is None %}
+                <a href="{% url 'login' %}">
+                {% else %}
+                <a href="{% url 'course' pk=get.id %}">
+                {% endif %}
+                  <img src="../media/{{ get.image }}" alt="Image" class="img-fluid"></a>
+                <h3>
+                  {% if username is None %}
+                  <a href="{% url 'login' %}">
+                  {% else %}
+                  <a href="{% url 'course' pk=get.id %}">
+                  {% endif %}
+                  {{ get.name }}</a></h3>
+              </div>  
+              {% endfor %}               
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="site-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 text-center mb-5">
+            <div class="heading">
+              <span class="caption">Fikrlar</span>
+              <h2>Talabalarimiz fikrlari</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <h3 class="h5">Juda qulay!  </h3>
+              <div>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star-o text-warning"></span>
+              </div>
+              <blockquote class="mb-4">
+                <p>"Tizimdan foydalanish juda qulay va foydali ekan. :)"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+                <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid mr-3">
+                <div class="author-name">
+                  <span class="d-block">Husanov Abduqodir</span>
+                  <span>Talaba</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <h3 class="h5">Juda qulay! </h3>
+              <div>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star-o text-warning"></span>
+              </div>
+              <blockquote class="mb-4">
+                <p>"Tizimdan foydalanish juda qulay va foydali ekan. :)"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+                <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid mr-3">
+                <div class="author-name">
+                  <span class="d-block">Husanov Abduqodir</span>
+                  <span>Talaba</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="testimonial-2">
+              <h3 class="h5">Juda qulay! </h3>
+              <div>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star text-warning"></span>
+                <span class="icon-star-o text-warning"></span>
+              </div>
+              <blockquote class="mb-4">
+                <p>"Tizimdan foydalanish juda qulay va foydali ekan. :)"</p>
+              </blockquote>
+              <div class="d-flex v-card align-items-center">
+                <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid mr-3">
+                <div class="author-name">
+                  <span class="d-block">Husanov Abduqodir</span>
+                  <span>Talaba</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+  {% endblock %}
+      
+      

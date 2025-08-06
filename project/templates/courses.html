@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block content %}
+
+<div class="site-section-cover overlay" style="background-image: url('{% static 'images/hero_bg.jpg' %}');">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1><strong>Kurslar</strong></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            {% for get in courses %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="post-entry-1 h-100">
+                    <a class="thumbnail-link">
+                        <img src="/media/{{ get.image }}" alt="Image" style="max-height: 200px;min-height: 200px;" class="img-fluid">
+                    </a>
+                    <div class="post-entry-1-contents">
+
+                        <h2>
+                            {% if username is None %}
+                            <a href="{% url 'login' %}">
+                            {% else %}
+                            <a href="{% url 'course' pk=get.id %}">
+                            {% endif %}
+                                {{ get.name }}</a></h2>
+                        <span class="meta d-inline-block mb-3"> <span class="mx-2">by</span> <a >D.Fayziyeva</a></span>
+                        <p>
+                            IT sohasidagi bilim va ko'nikmalaringizni oshirish imkoniyatini qo'ldan boy bermang
+                        </p>
+                        <p>
+                            {% if username is None %}
+                            <a href="{% url 'login' %}" class="btn btn-primary custom-btn">
+                            {% else %}
+                            <a href="{% url 'course' pk=get.id %}" class="btn btn-primary custom-btn">
+                            {% endif %}
+                                Boshlash</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}            
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

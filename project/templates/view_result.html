@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>Test natijasi</title>
+</head>
+<style>
+    /* Asosiy konteyner */
+    .courses-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        /* Kichik ekranda elementlarni quyi qatorda chiqaradi */
+        padding: 20px;
+    }
+
+    /* Har bir kurs kartasi */
+    .course {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        width: 90%;
+        /* Ekranga mos tushishi uchun */
+        max-width: 400px;
+        /* Juda katta bo‘lib ketmasligi uchun */
+        margin: 20px;
+        text-align: center;
+    }
+
+    /* Test mashg'uloti preview */
+    .course-preview {
+        background: #7e0ba5;
+        color: white;
+        padding: 20px;
+    }
+
+    .course-preview h2 {
+        font-size: 24px;
+    }
+
+    .course-preview a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /* Test natijalarini ko‘rsatadigan info qismi */
+    .course-info {
+        padding: 20px;
+    }
+
+    /* Progress bar */
+    .progress-container {
+        background: #ddd;
+        height: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .progress {
+        background: #7e0ba5;
+        height: 10px;
+        border-radius: 5px;
+        width: 50%;
+        /* Dinamik ravishda o‘zgartirish kerak */
+    }
+
+    .progress-text {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* Tugmalar */
+    .btn {
+        display: inline-block;
+        background: #7e0ba5;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        background: #574b90;
+    }
+
+    /* Mobil moslashuv */
+    @media (max-width: 600px) {
+        .course {
+            width: 100%;
+            /* Katta ekranda 90%, mobilda 100% */
+        }
+
+        .progress-text {
+            font-size: 12px;
+        }
+    }
+</style>
+
+<body>
+    <div class="courses-container">
+        <div class="course">
+            <div class="course-preview">
+                <h2>Test natijasi</h2>
+            </div>
+            <div class="course-info">
+                <h3 style="background-color: #faff9a; margin: 10px;padding: 15px;">
+                    Savollar soni: 10 ta
+                </h3>
+                <h3 style="background-color: #faff9a; margin: 10px;padding: 15px;">
+                    To‘g‘ri javoblar soni: {{ counter }} ta
+                </h3>
+                <a style="text-decoration: none;" href="{% url 'courses' %}" class="btn">Javoblarni ko‘rish</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    // INSERT JS HERE
+
+
+    // SOCIAL PANEL JS
+    const floating_btn = document.querySelector('.floating-btn');
+    const close_btn = document.querySelector('.close-btn');
+    const social_panel_container = document.querySelector('.social-panel-container');
+
+    floating_btn.addEventListener('click', () => {
+        social_panel_container.classList.toggle('visible')
+    });
+
+    close_btn.addEventListener('click', () => {
+        social_panel_container.classList.remove('visible')
+    });
+</script>
+
+
+</html>

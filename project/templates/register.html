@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizimga kirish</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #7D54A2;
+            --secondary-color: #9A6FC3;
+            --white: #ffffff;
+            --gray: #f0f0f0;
+            --text-color: #333;
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: var(--white);
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .input-group {
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: var(--gray);
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .button {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: var(--secondary-color);
+        }
+
+        .toggle-btn {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .toggle-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="authContainer">
+        <div class="logo">
+            <img src="/static/nz.png" alt="Logotip">
+        </div>
+
+        <!-- Login qismi -->
+        <div id="loginForm">
+            <h2 class="title">Tizimga Kirish</h2>
+            <form action="{% url 'signin' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="username" placeholder="Login" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Parol</label>
+                    <input type="password" id="password" name="password" placeholder="Parol" required>
+                </div>
+                <button type="submit" class="button">Kirish</button>
+            </form>
+            <p class="toggle-btn" onclick="toggleForm()">Ro'yxatdan o'tish</p>
+        </div>
+
+        <!-- Ro'yxatdan o'tish qismi -->
+        <div id="registerForm" style="display: none;">
+            <h2 class="title">Ro'yxatdan o'tish</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="fullname">F.I.SH</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="F.I.SH" required>
+                </div>
+                <div class="input-group">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="username" placeholder="Login" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Parol</label>
+                    <input type="password" id="password" name="password" placeholder="Parol" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm_password">Parolni Takrorlash</label>
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Parolni takrorlash" required>
+                </div>
+                <button type="submit" class="button">Ro'yxatdan o'tish</button>
+            </form>
+            <p class="toggle-btn" onclick="toggleForm()">Tizimga kirish</p>
+        </div>
+    </div>
+
+     <script>
+        function toggleForm() {
+            let loginForm = document.getElementById('loginForm');
+            let registerForm = document.getElementById('registerForm');
+            let container = document.getElementById('authContainer');
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                registerForm.style.display = "none";
+                container.style.height = "auto";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
+                container.style.height = "auto";
+            }
+        }
+    </script> 
+
+</body>
+
+</html>

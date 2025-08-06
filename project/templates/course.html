@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block content %}
+
+<div class="site-section-cover overlay" style="background-image: url('{% static 'images/hero_bg.jpg' %}');">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1><strong>Kurs mashg'uloti</strong></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-unstyled tutorial-section-list">
+                    {% for get in thema %}
+                    <div style="text-align: center;">
+                        <h4>{{ get.1 }}</h4>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                        {% for mr in maruza %}
+                            {% if get.0 == mr.3 %}
+                            <li>
+                                <h3><a href="{% url 'maruza' pk=mr.0 %}">{{ mr.1 }} <sub style="color: green;"><img src="{% static 'images/book.png' %}" style="max-width: 25px;" alt=""></sub> </a></h3>
+                                <p>
+                                    <span class="mr-2 mb-2">{{ mr.2 }}</span>
+                                </p>
+                                <a href="{% url 'maruza' pk=mr.0 %}" class="play">Kirish</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% for mr in taqdimot %}
+                            {% if get.0 == mr.3 %}
+                            <li>
+                                <h3><a href="{% url 'taqdimot' pk=mr.0 %}">{{ mr.1 }} <sub style="color: green;"><img src="{% static 'images/ppt.png' %}" style="max-width: 25px;" alt=""></sub> </a></h3>
+                                <p>
+                                    <span class="mr-2 mb-2">{{ mr.2 }}</span>
+                                </p>
+                                <a href="{% url 'taqdimot' pk=mr.0 %}" class="play">Kirish</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% for mr in testthema %}
+                            {% if get.0 == mr.2 %}
+                            <li>
+                                <h3><a href="{% url 'test' pk=mr.0 %}">{{ mr.1 }} <sub style="color: green;"><img src="{% static 'images/exam-time.png' %}" style="max-width: 25px;" alt=""></sub> </a></h3>
+                                <p>
+                                    <span class="mr-2 mb-2">{{ mr.3 }}</span>
+                                </p>
+                                <a href="{% url 'test' pk=mr.0 %}" class="play">Kirish</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    <!-- sertifikat berish -->
+                    <li>
+                        <h3><a href=""> Sertifikatni olish <sub style="color: green;"><img
+                                        src="{% static 'images/quality.png' %}" style="max-width: 25px;" alt=""></sub> </a></h3>
+                        <a href="{% url 'certificate' user=3 pk=1 %}" class="play">Yuklab olish</a>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                {% for course in courses %}
+                <div class="box-side mb-3">
+                    <a href="#"><img src="../media/{{ course.4 }}" alt="Image" class="img-fluid"></a>
+                    <h3><a href="#">{{ course.3 }}</a></h3>
+                    <span class="meta d-inline-block mb-3"> <span class="mx-2">by</span> <a href="#">D.Fayziyeva</a></span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

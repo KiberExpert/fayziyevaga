@@ -1,0 +1,90 @@
+{% extends 'v2/base.html' %} {% load static %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <!-- Page Header Box Start -->
+                <div class="page-header-box">
+                    <h1 class="text-anime-style-2" data-cursor="-opaque">Videodars</h1>
+                    <nav class="wow fadeInUp">
+                        
+                    </nav>
+                </div>
+                <!-- Page Header Box End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<style>
+    a {
+        color: black;
+    }
+</style>
+<!-- Page Projects Start -->
+<div class="page-projects">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align: center;"><h3>{{ video.name }}</h3></div>
+            <div style="text-align: center;">
+                <iframe width="960" height="615" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Page Projects End -->
+
+<!-- Scrolling Ticker Section Start -->
+<div class="our-scrolling-ticker footer-scrolling-ticker">
+    <!-- Scrolling Ticker Start -->
+    <div class="scrolling-ticker-box">
+        <div class="scrolling-content">
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+        </div>
+
+        <div class="scrolling-content">
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/c++.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/go.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/java.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/js.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/python.png' %}" alt=""></span>
+            <span><img src="{% static 'v2/ruby.png' %}" alt=""></span>
+        </div>
+    </div>
+</div>
+<!-- Scrolling Ticker Section End -->
+{% endblock %}

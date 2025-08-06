@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test</title>
+    <style>
+        img {
+            max-width: 100%;
+            /* Rasm ekran chegarasidan chiqmasligi uchun */
+            height: auto;
+            /* Asl proporsiyani saqlash uchun */
+            display: block;
+            /* Markazga joylash uchun */
+            margin: auto;
+            /* Markazga olib kelish */
+            border-radius: 6px;
+            /* Burchaklarni yumshatish */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question label {
+            font-size: 18px;
+            display: block;
+        }
+
+        .options {
+            margin-top: 10px;
+        }
+
+        .options label {
+            margin-right: 15px;
+        }
+
+        .timer {
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .blocked {
+            display: none;
+        }
+    </style>
+    <style>
+        .options {
+            display: flex;
+            flex-direction: column;
+            /* Vertikal joylashtirish */
+            gap: 10px;
+            /* Har bir option orasidagi bo'shliq */
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            /* Label va radio buttonni yonma-yon joylashtiradi */
+            gap: 10px;
+            /* Label va radio button orasidagi bo'shliq */
+        }
+
+        input[type="radio"] {
+            margin-left: 10px;
+            /* Radio buttonning chap tomoniga bo'shliq */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>{{ subject.1 }}</h1>
+            <div style="text-align: center; font-size: 34px; color: red;" id="timer" class="timer" style="color: red;">
+            </div>
+        </div>
+        <style>
+            .option input[type="radio"]:checked+label {
+                background-color: transparent;
+                /* Labelni fon rangini o'chiramiz */
+            }
+
+            .option.selected {
+                background-color: #5392ff;
+                /* Tanlangan variantni sariq qilish */
+                border-radius: 5px;
+                padding: 5px;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll('.question .option input[type="radio"]').forEach((radio) => {
+                    radio.addEventListener("change", function () {
+                        let options = this.closest('.options').querySelectorAll('.option');
+
+                        // Oldingi tanlangan classni olib tashlash
+                        options.forEach(option => option.classList.remove("selected"));
+
+                        // Tanlangan div ga sariq fon qo'shish
+                        this.closest('.option').classList.add("selected");
+                    });
+                });
+            });
+
+        </script>
+        <form action="{% url 'scan_test' %}" id="testForm" method="post">
+            {% csrf_token %}
+            {% for get in AllTests %}
+            {% for t in get %}
+            <div class="question">
+                <div style="background-color: #e08cfc; padding: 10px;border-radius: 6px;">
+                    <b class="question-number"></b>
+                </div>
+                <label class="savol_header"> {{ t.1|safe }}</label> <!-- Savol headeri -->
+                <div class="options">
+                    <div class="option" onclick="selectOption('q{{ t.0 }}a')">
+                        <input type="radio" id="q{{ t.0 }}a" name="q{{ t.0 }}" value="{{ t.2 }}">
+                        <label for="q{{ t.0 }}a">{{ t.2|safe }} </label>
+                    </div>
+                    <div class="option" onclick="selectOption('q{{ t.0 }}b')">
+                        <input type="radio" id="q{{ t.0 }}b" name="q{{ t.0 }}" value="{{ t.3 }}">
+                        <label for="q{{ t.0 }}b">{{ t.3|safe }}</label>
+                    </div>
+                    <div class="option" onclick="selectOption('q{{ t.0 }}c')">
+                        <input type="radio" id="q{{ t.0 }}c" name="q{{ t.0 }}" value="{{ t.4 }}">
+                        <label for="q{{ t.0 }}c">{{ t.4|safe }}</label>
+                    </div>
+                    <div class="option" onclick="selectOption('q{{ t.0 }}d')">
+                        <input type="radio" id="q{{ t.0 }}d" name="q{{ t.0 }}" value="{{ t.5 }}">
+                        <label for="q{{ t.0 }}d">{{ t.5|safe }}</label>
+                    </div>
+                    <input disabled type="hidden" name="savol" value="savol{{ t.0 }}">
+                </div>
+
+            </div>
+            {% endfor %}
+            {% endfor %}
+            <input type="hidden" value="{{ app_testrunID }}" name="testrun">
+
+
+
+
+            <div style="text-align: center;">
+                <button type="submit" id="submitBtn" class="submit-btn" onclick="submitTest()">Testni Yuborish</button>
+            </div>
+        </form>
+    </div>
+    <style>
+        .option {
+            cursor: pointer;
+            /* Qo'lcha kursori */
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        .option:hover {
+            background: #5392ff;
+            /* Hover qilinganda fon rangi o‘zgaradi */
+            transform: scale(1.01);
+            /* Biroz kattalashadi (Qalqib chiqadi) */
+        }
+    </style>
+    <script>
+        let totalTime = 600; // Testning davomiyligi (10 daqiqa)
+        let timerInterval;
+        let isTestSubmitted = false; // Test yuborilganini tekshirish
+
+        // Vaqtni yangilash
+        function updateTimer() {
+            let minutes = Math.floor(totalTime / 60);
+            let seconds = totalTime % 60;
+            document.getElementById("timer").textContent = `Vaqt: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+            if (totalTime <= 0 && !isTestSubmitted) {
+                clearInterval(timerInterval); // Timerni to'xtatish
+
+                // Vaqt tugaganda tugmani avtomatik bosish
+                document.getElementById("submitBtn").click();  // Tugmani avtomatik bosish
+            } else {
+                totalTime--;
+            }
+        }
+
+
+        // Klaviatura va sichqoncha bloklash
+        document.onkeydown = function (e) {
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+            }
+        };
+
+        document.oncontextmenu = function (e) {
+            e.preventDefault();
+        };
+
+        // Timerni ishga tushurish
+        timerInterval = setInterval(updateTimer, 1000);
+
+    </script>
+    <script>
+        document.addEventListener("keydown", function (e) {
+            // F5, Ctrl + U, Ctrl + C, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + Shift + K
+            if (e.keyCode === 116 || // F5
+                (e.ctrlKey && e.keyCode === 85) || // Ctrl + U
+                (e.ctrlKey && e.keyCode === 67) || // Ctrl + C
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 75))) { // Ctrl + Shift + I/J/K
+                e.preventDefault();
+            }
+        });
+
+        // Sichqonchaning o‘ng tugmachasini bloklash
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        // Print Screen (skrinshot olish) ni bloklash
+        document.addEventListener("keyup", function (e) {
+            if (e.key === "PrintScreen") {
+                navigator.clipboard.writeText(""); // Clipboardni tozalash
+
+            }
+        });
+
+        // Ctrl + Shift + S orqali skrinshot olishni bloklash
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 83) {
+                e.preventDefault();
+            }
+        });
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let questions = document.querySelectorAll(".question");
+
+            questions.forEach((question, index) => {
+                let questionNumberElement = question.querySelector(".question-number");
+                if (questionNumberElement) {
+                    questionNumberElement.textContent = `${index + 1}-savol:`; // 1 dan boshlab chiqariladi
+                }
+            });
+        });
+
+    </script>
+    <script>
+        function selectOption(radioId) {
+            let radio = document.getElementById(radioId);
+            radio.checked = true;
+
+            // Barcha variantlardan "selected" klassini olib tashlash
+            let options = radio.closest(".options").querySelectorAll(".option");
+            options.forEach(option => option.classList.remove("selected"));
+
+            // Faqat tanlangan variantga "selected" qo‘shish
+            radio.closest(".option").classList.add("selected");
+        }
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let headers = document.querySelectorAll(".savol_header");
+            headers.forEach(header => {
+                header.innerHTML = header.innerHTML.replace(/<\/?b>|<\/?strong>/g, "");
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
